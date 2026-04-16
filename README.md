@@ -1,75 +1,79 @@
-BluePath
-BluePath is a next-generation academic graph platform designed for the Department of Computer Science. It serves as a high-performance, AI-driven evolution of the original Courseography project, modernized to help students and faculty navigate complex prerequisite chains with ease.
+BluePath: Next-Gen Academic Graph Platform
+BluePath is a high-performance, graph-based academic planning engine. It replaces legacy static degree visualizations with a dynamic, AI-maintained ecosystem using Next.js, FastAPI, and Neo4j.
 
-Built with a focus on speed, data integrity, and automated ingestion, BluePath transitions from a static Haskell-based parser to a dynamic Graph Database (Neo4j) and RAG-powered data pipeline.
+Note for AI Agents: Read docs/AGENT.md and docs/ARCHITECTURE.md before writing any code. Follow the Platform-First directive: Build for UofT today, but ensure the schema and UI are university-agnostic for tomorrow.
 
-🚀 Key Features
-Interactive Dependency Graphs: Powered by React Flow, providing a fluid, IDE-like interface for exploring course relationships.
+🏗️ System Architecture
+Frontend: Next.js 15 (App Router) + React Flow (@xyflow/react).
 
-Pathfinding Engine: Instantly calculate the "Shortest Path to Graduation" or visualize how a single 100-level course unlocks future 400-level opportunities.
+Backend: FastAPI (Python 3.12) - RESTful API for graph traversal.
 
-AI-Driven Ingestion: Uses a RAG (Retrieval-Augmented Generation) pipeline to automatically parse academic calendars and syllabi into structured graph nodes.
+Database: Neo4j (Graph Database) - Stores courses as nodes and prerequisites as edges.
 
-Faculty Impact Analysis: A specialized view for department administrators to see how curriculum changes ripple through the prerequisite ecosystem.
+AI/RAG: Dify + Local LLM (Llama 3) - Automated extraction of course data from university calendars.
 
-Departmental Privacy: Fully self-hosted infrastructure ensuring institutional data stays within the department's GPU cluster.
+Infrastructure: Native Linux (Ubuntu/Debian) with dedicated GPU support for LLM tasks.
 
-🛠 Tech Stack
-Frontend: Next.js (TypeScript), Tailwind CSS, React Flow
-
-Backend: Python FastAPI (High-performance asynchronous API)
-
-Database: Neo4j (Native Property Graph Database)
-
-AI/Orchestration: Dify / LangChain (for automated PDF/Syllabus parsing)
-
-Infrastructure: Self-hosted on Linux GPU Cluster
-
-📂 Project Structure
+📂 Repository Structure
 Plaintext
+BluePath/
 ├── apps/
-│   ├── web/          # Next.js frontend (React Flow implementation)
-│   └── api/          # FastAPI backend (Neo4j logic & Pathfinding)
+│   ├── api/            # Python FastAPI Backend
+│   │   ├── main.py     # Entry point
+│   │   ├── database.py # Neo4j connection logic
+│   │   └── config.py   # Pydantic environment management
+│   └── web/            # Next.js Frontend
+│       ├── app/        # Page routes (React Flow Canvas)
+│       └── components/ # UI Components (Bento grids, Shadcn)
+├── docs/               # Technical Specifications (AI Knowledge Base)
 ├── packages/
-│   ├── ingestion/    # Python scripts for RAG & PDF parsing
-│   └── schema/       # Shared TypeScript types and Cypher queries
-├── docker-compose.yml
-└── README.md
-⚡ Quick Start (Development)
-Prerequisites
-Docker & Docker Compose
-
-Node.js (v20+)
-
-Python 3.10+
-
-1. Clone the Repository
-Bash
-git clone https://github.com/your-username/bluepath.git
-cd bluepath
-2. Launch Infrastructure
-This starts the Neo4j instance and the Dify orchestration environment.
+│   └── ingestion/      # Scrapers and RAG extraction scripts
+└── .clinerules         # Critical AI operational guardrails
+🚦 Getting Started (Native Linux)
+1. Database (Neo4j)
+Ensure Neo4j is running locally:
 
 Bash
-docker-compose up -d
-3. Setup Frontend
+sudo systemctl start neo4j
+# Default: http://localhost:7474 | Bolt: localhost:7687
+2. Backend Setup
+Bash
+cd apps/api
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+uvicorn main:app --reload
+3. Frontend Setup
 Bash
 cd apps/web
 npm install
 npm run dev
-4. Setup Backend
-Bash
-cd apps/api
-pip install -r requirements.txt
-python main.py
-🧠 Development Workflow: "Vibe Coding"
-This project is optimized for AI-assisted development. If using Cline CLI or a local LLM, you can reference the existing courseography logic to scaffold new BluePath features:
+🤖 Instructions for AI Agents
+Core Engineering Principles
+Graph-First: Do not use relational (SQL) logic. Every course connection must be a RELATIONSHIP in Neo4j.
 
-Map Data: Use the ingestion scripts to port legacy JSON data into Neo4j.
+Platform Abstraction: Use the institution property on all nodes. Reference tailwind.config.ts for theme-able colors.
 
-Generate Logic: Ask the AI to write Cypher queries for complex prerequisite logic (e.g., "Find all exclusions for CSC209").
+Vibe Coding Style: Prioritize high-quality, modern UI (Glassmorphism, Bento grids, Framer Motion) and concise, performant Python code.
 
-Iterate UI: Use Tailwind components to rapidly build out the student "Sandbox" planner.
+No Static Assets: Do not generate static SVG graphs. All graphs must be interactive via @xyflow/react.
 
-🛡 License
-Internal use only – Department of Computer Science.
+Initial Task Sequence
+Verify Environment: Check .env files in apps/api and apps/web.
+
+Schema Sync: Run the Neo4j initialization script in docs/BOOTSTRAP.md to set constraints.
+
+API Heartbeat: Implement a GET /health endpoint in FastAPI that checks the Neo4j connection.
+
+Canvas Setup: Create a basic React Flow canvas in apps/web/app/page.tsx that fetches a dummy "Hello World" node from the API.
+
+📈 Roadmap
+[ ] Phase 1: The Skeleton. Linux Native environment, Neo4j connection, and basic Flow canvas.
+
+[ ] Phase 2: The Migration. Port UofT Courseography data into the Neo4j graph.
+
+[ ] Phase 3: The Brain. Implement Dijkstra-based pathfinding for degree planning.
+
+[ ] Phase 4: The Ingestor. Build the Dify-powered RAG scraper for automated updates.
+
+[ ] Phase 5: The Platform. Reskin for a second university (e.g., Waterloo) using the institution namespace.
