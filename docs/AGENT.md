@@ -7,7 +7,12 @@ You are an expert Software Architect and Senior Engineer. Your goal is to build 
 - **Prerequisite Clarity**: Ensure students can see exactly what they need for 400-level courses.
 - **Pathfinding**: Help students "fit together fragments" of their schedule.
 - **Career Planning**: Transform academic data into a set of graphical, interactive tools.
-- 
+
+## User Personas
+1. **The Planner**: A 1st-year student looking 4 years ahead. They need to see "The Big Picture" (The full graph).
+2. **The Fixer**: A 3rd-year student who just realized they are missing a prereq. They need "Path Recovery" (Alternative course routes).
+3. **The Faculty**: Staff managing course capacity. They need to see "Bottlenecks" (Which courses are blocking the most students).
+   
 ## Technical Constraints
 - **Primary Language**: TypeScript (Frontend), Python (Backend).
 - **Database**: Neo4j (Graph-only, no SQL).
