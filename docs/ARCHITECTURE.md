@@ -1,22 +1,15 @@
-graph TD
-    subgraph Frontend [Next.js App]
-        A[React Flow Canvas]
-    end
+# BluePath System Architecture
 
-    subgraph Backend [FastAPI Server]
-        B[Python API]
-        E[RAG Ingestion Engine]
-    end
+## 1. System Components
+- **Frontend**: Next.js (Node.js/TypeScript) + React Flow.
+- **Backend**: FastAPI (Python 3.10+).
+- **Database**: Neo4j (Graph Database).
+- **Automation**: Dify + Local LLM (Llama 3) for RAG-based ingestion.
 
-    subgraph Storage [Neo4j]
-        C[(Course Graph DB)]
-    end
+## 2. Data Flow
+1. **User Request**: User opens a graph -> Next.js calls FastAPI.
+2. **Graph Retrieval**: FastAPI runs a Cypher query -> Neo4j returns Nodes/Edges.
+3. **Rendering**: React Flow draws the JSON data dynamically.
+4. **Maintenance**: Dify script scrapes UofT Calendar -> LLM extracts data -> Python updates Neo4j.
 
-    subgraph External [University Site]
-        D[Official Calendar]
-    end
-
-    A <--> B
-    B <--> C
-    D --> E
-    E --> C
+## 3. High-Level Diagram
