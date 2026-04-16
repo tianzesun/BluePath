@@ -1,0 +1,7 @@
+# BluePath Vibe Coding Rules
+
+- **Tech Stack Enforcement**: If I ask for a feature, implement it using Next.js (frontend) and FastAPI (backend). 
+- **Database Protocol**: All data must be persisted in Neo4j. Do not use local JSON files for production data.
+- **Maintenance Awareness**: Remember that this project must be "easy to maintain." Prioritize automated ingestion logic over manual data entry.
+- **UI Guidelines**: Use Tailwind CSS. Every graph component must be interactive via React Flow.
+- **Documentation First**: Before making major architectural changes, update the files in the `/docs` folder.
