@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #002A5C; /* UofT Navy */
+}
+
+/* Dark mode support for that "Advanced Tool" look */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #020617;
+    --foreground: #f8fafc;
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+}
+
+/* React Flow custom styling */
+.react-flow__edge-path {
+  stroke: #002A5C;
+  stroke-width: 2;
+}
