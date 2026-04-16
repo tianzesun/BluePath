@@ -1,7 +1,3 @@
-Since you are building BluePath as a high-performance, department-grade replacement for Courseography, the README should reflect its advanced tech stack (Neo4j, RAG, React Flow) while maintaining a professional "internal tool" tone.
-
-Here is a comprehensive README.md template you can drop into your repository:
-
 BluePath
 BluePath is a next-generation academic graph platform designed for the Department of Computer Science. It serves as a high-performance, AI-driven evolution of the original Courseography project, modernized to help students and faculty navigate complex prerequisite chains with ease.
 
